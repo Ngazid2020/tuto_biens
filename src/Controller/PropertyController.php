@@ -38,6 +38,8 @@ class PropertyController extends AbstractController
         ]);
     }
 
+    
+
     /**
      * @Route("/biens/{slug}-{id}", name="property.show", requirements={"slug": "[a-z0-9\-]*"})
      * @return Response
