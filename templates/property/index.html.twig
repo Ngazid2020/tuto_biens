@@ -2,18 +2,36 @@
 {% block title 'Tous nos biens' %}
 
 {% block body %}
-<div class="jumbotron text-center">
-    <H1>Liste de tous nos biens</H1>
-    
-    <p>
-        Néanmoins, il y a une limite à ce que UML peut faire dans un pilotage d’un SI. En effet,
-        bien que la notation privilégie le concept d’objet, UML ne couvre pas totalement la notion de
-        processus métier qui est au cœur de la modélisation des Business Process (concepts BPM).
-        Pour gravir cet obstacle, des auteurs dont [El Azzouzi, 2009] propose une mise en relation
-        avec la notation BPMN pour permettre la modélisation des processus métier. Grâce aux
-        diagrammes d’activités UML, il est possible de basculer au BPMN pour modéliser les processus
-        métier.
-        Pour appuyer nos arguments, le tableau ci-dessous décrit les similitudes q
-    </p>
-</div>
+	<div class="jumbotron">
+		<div class="container">
+			{{ form_start(form) }}
+			<div class="form-row">
+				<div class="col">
+					{{ form_row(form.minSurface) }}
+				</div>
+				<div class="col">
+					{{ form_row(form.maxPrice) }}
+				</div>
+				<div class="col">
+					<button class="btn btn-primary">Rechercher</button>
+				</div>
+			</div>
+			{{ form_end(form) }}
+		</div>
+	</div>
+	<div class="container mt-4">
+		<H1>Liste des biens disponibles</H1>
+
+		<div class="row">
+			{% for property in properties %}
+				<div class="col-md-4">
+					{{ include('property/__property.html.twig') }}
+				</div>
+			{% endfor %}
+		</div>
+		<div class="navigation">
+			{{ knp_pagination_render(properties) }}
+		</div>
+	</div>
+
 {% endblock %}

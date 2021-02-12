@@ -3,9 +3,11 @@
 namespace App\Repository;
 
 use App\Entity\Property;
+use App\Entity\PropertySearch;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\Query;
 
 /**
  * @method Property|null find($id, $lockMode = null, $lockVersion = null)
@@ -21,14 +23,29 @@ class PropertyRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return Property[]
+     * @return Query
      */
-    public function findByNotSold( ):array
+    public function findByNotSoldQuery(PropertySearch $search):Query
     {
-        return $this->$this->findVisibleQuery()            
-            ->getQuery()
-            ->getResult()
-        ;
+        $query = $this->findVisibleQuery();    
+        
+        if($search->getMaxPrice()){
+            $query = $query
+                ->andWhere('p.price <= :maxprice')
+                ->setParameter('maxprice', $search->getMaxPrice())              
+            ;
+        }
+
+        if($search->getMinSurface()){
+            $query = $query
+                ->andWhere('p.surface >= :minsurface')
+                ->setParameter('minsurface', $search->getMinSurface())              
+            ;
+        }
+
+        
+
+        return $query->getQuery();
     }
 
     /**
