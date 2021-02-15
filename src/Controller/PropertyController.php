@@ -43,7 +43,7 @@ class PropertyController extends AbstractController
         $properties = $paginator->paginate(
             $this->repository->findByNotSoldQuery($search),
             $request->query->getInt('page',1),
-            9
+            12
         );
         return $this->render('property/index.html.twig',[
             'current_menu'=>'properties',
