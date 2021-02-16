@@ -18,5 +18,11 @@
 		<div class="col-md-2">{{ form_row(form.sold) }}</div>
 	</div>
 	{{ form_rest(form) }}
-<button class="btn btn-primary">{{ button|default('Enregistrer') }}</button>
+	<div class="row">
+	<div class="col-md-1"><button class="btn btn-primary">{{ button|default('Enregistrer') }}</button></div>
+		
+		<div><a href="{{ path('admin.option.index') }}" class="btn btn-secondary">Voir la liste des options</a></div>
+		
+	</div>
+
 {{ form_end(form) }}

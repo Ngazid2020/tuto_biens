@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use App\Entity\Property;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 
-class imageCacheSubscriber implements EventSubscriber
+class ImageCacheSubscriber implements EventSubscriber
 {
     /**
      * @var CacheManager
